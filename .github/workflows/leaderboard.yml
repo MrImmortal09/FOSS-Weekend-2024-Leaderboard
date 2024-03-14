@@ -1,7 +1,7 @@
 name: Leaderboard Update
 
 on:
-  repository_dispatch:
+  workflow_dispatch:
     types: [leaderboard_update]
 
 jobs:
