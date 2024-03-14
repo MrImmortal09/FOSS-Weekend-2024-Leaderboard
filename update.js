@@ -1,13 +1,14 @@
+
 const auth_headers = new Headers({
   'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
 })
 
-function fetch_new_data_and_save() {
+async function fetch_new_data_and_save() {
   fetch("https://github.com/Animeshz/Foss-Weekend-Leaderboard/raw/main/repos.txt")
     .then(resp => resp.text())
-    .then(repos => {
+    .then(async (repos) => {
       let ret = new Map();
-      repos.split(/\r?\n/).forEach(repo => {
+      repos.split(/\r?\n/).forEach(async (repo) => {
         let resp = [];
         let page = 1;
         const t_resp = await fetch(
@@ -48,7 +49,7 @@ function fetch_new_data_and_save() {
       console.log(ret2);
 
       await fetch('https://api.github.com/repos/Animeshz/Foss-Weekend-Leaderboard/dispatches', {
-        method: "POST"
+        method: "POST",
         headers: auth_headers,
         body: JSON.stringify({
           event_type: 'leaderboard_update',
@@ -62,12 +63,12 @@ function fetch_new_data_and_save() {
     })
 }
 
-function fetch_existing_data() {
+async function fetch_existing_data() {
   return fetch("https://github.com/Animeshz/Foss-Weekend-Leaderboard/raw/leaderboard/leaderboard.json")
     .then(resp => resp.json())
 }
 
-function start_exec() {
+async function start_exec() {
   return fetch("https://api.github.com/repos/Animeshz/Foss-Weekend-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1", {
       headers: auth_headers
     })
