@@ -1,6 +1,8 @@
 
 const auth_headers = new Headers({
-  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
+  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
+
+	// 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
 })
 
 async function fetch_new_data_and_save() {
