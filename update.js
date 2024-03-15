@@ -1,14 +1,17 @@
 
 const auth_headers = new Headers({
-  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
+  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
 
+  // 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
 	// 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
+  // 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
 })
 
 async function fetch_new_data_and_save() {
   fetch("https://github.com/ecxtacy/FOSS-Weekend-2024-Leaderboard/raw/main/repos.txt")
     .then(resp => resp.text())
     .then(async (repos) => {
+      console.log(repos)
       let ret = new Map();
       repos.split(/\r?\n/).forEach(async (repo) => {
         let resp = [];
@@ -48,6 +51,7 @@ async function fetch_new_data_and_save() {
         }
       });
       let ret2 = Object.fromEntries(ret);
+      console.log("here")
       console.log(ret2);
 
       await fetch('https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/dispatches', {
@@ -61,6 +65,8 @@ async function fetch_new_data_and_save() {
         }),
       });
 
+
+
       return ret2;
     })
 }
@@ -71,6 +77,7 @@ async function fetch_existing_data() {
 }
 
 async function start_exec() {
+  // "https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1"
   return fetch("https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1", {
       headers: auth_headers
     })
