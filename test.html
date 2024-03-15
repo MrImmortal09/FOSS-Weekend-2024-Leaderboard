@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+
+<script>
+
+  
+  setTimeout(() => {
+    // function dec(s) {
+    //   var decrypted = CryptoJS.AES.decrypt(s, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 }).toString();
+    //   return decrypted;
+    // }
+    let str = "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";
+    let key = CryptoJS.enc.Utf8.parse('0123456789abcdef0123456789abcdef'); // 256-bit key
+    let iv = CryptoJS.enc.Utf8.parse('abcdef9876543210abcdef9876543210'); // 128-bit IV
+  
+    let x = CryptoJS.AES.encrypt(str, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 }).toString();
+    console.log(x);
+
+    let decrypted = CryptoJS.AES.decrypt(x, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 }).toString();
+    console.log(decrypted)
+  }, 3000)
+</script>
+</html>
