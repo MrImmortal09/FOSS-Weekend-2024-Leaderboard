@@ -206,26 +206,26 @@ async function fetch_existing_data() {
 
 async function start_exec() {
 
-  if((Date.now() - lastUpdated)/1000 > 120 || cachedResults === null) {
-    const tt = await fetch_repos();
-    lastUpdated = Date.now();
+  // if((Date.now() - lastUpdated)/1000 > 120 || cachedResults === null) {
     
-    let results = [];
-    
-    for(let k in tt) {
-      let user = {};
-      user.username = k;
-      user.score = tt[k];
-      results.push(user);
-    }
-    console.log(results);
-
-    return results;
-
-  } else {
-    console.log("cached results shown")
-    return cachedResults;
+  // } else {
+  //   console.log("cached results shown")
+  //   return cachedResults;
+  // }
+  const tt = await fetch_repos();
+  lastUpdated = Date.now();
+  
+  let results = [];
+  
+  for(let k in tt) {
+    let user = {};
+    user.username = k;
+    user.score = tt[k];
+    results.push(user);
   }
+  console.log(results);
+
+  return results;
 
   // "https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1"
 
