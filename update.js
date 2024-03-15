@@ -1,10 +1,6 @@
 
 const auth_headers = new Headers({
-  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
-
-  // 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
-	// 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
-  // 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
+  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
 })
 
 let lastUpdated = 0;
@@ -237,7 +233,8 @@ async function start_exec() {
   //   return cachedResults;
   // }
   const tt = await fetch_repos();
-  lastUpdated = Date.now();
+  lastUpdated = localStorage.getItem("lup");
+  console.log(lastUpdated)
   
   let results = [];
   
@@ -250,6 +247,8 @@ async function start_exec() {
   console.log(results);
 
   results.sort((a, b) => b.score - a.score);
+
+  localStorage.setItem('lup', Date.now());
   return results;
 
   // "https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1"
