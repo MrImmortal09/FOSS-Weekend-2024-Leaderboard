@@ -1,6 +1,6 @@
 
 const auth_headers = new Headers({
-  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
+  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
 
   // 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
 	// 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
@@ -10,27 +10,53 @@ const auth_headers = new Headers({
 let lastUpdated = 0;
 let cachedResults = null;
 
+const repo_list = [
+  "iiitl/realty",
+  "iiitl/translate_app",
+  "iiitl/chat_buddy",
+  "iiitl/Classification",
+  "iiitl/Regression",
+  "iiitl/Wollete",
+  "iiitl/crypto_project",
+  "iiitl/batting",
+  "iiitl/snake-game-js",
+  "iiitl/Github-Finder",
+  "iiitl/MERN_AUTH",
+  "iiitl/Note_Generator",
+  "iiitl/Jumble_Words",
+  "iiitl/Media_Player",
+  "iiitl/React-Native-To-Do",
+  "iiitl/bash-practice-repo-24",
+  "iiitl/git-practice-weekend-24"
+];
+
+
 async function fetch_repos() {
 
-  let final = await fetch("https://raw.githubusercontent.com/ecxtacy/FOSS-Weekend-2024-Leaderboard/main/repos.txt")
-    .then(resp => resp.text())
-    .then(async (repos) => {
-      console.log(repos)
-      // return;
+  // let final = await fetch("https://raw.githubusercontent.com/ecxtacy/FOSS-Weekend-2024-Leaderboard/main/repos.txt", { headers: auth_headers })
+  //   .then(resp => resp.text())
+  //   .then(async (repos) => {
+      // console.log(repos)
+      // // return;
 
       let ret = new Map();
       let resp = [];
 
       let respPromises = [];
 
-      let finalRepos = repos.split(/\r?\n/);
+      // let finalRepos = repos.split(/\r?\n/);
 
-      repos.split(/\r?\n/).forEach(async (repo) => {
+      (async () => {
+
+
+      })();
+
+      repo_list.forEach((repo) => {
         console.log(repo)
         let page = 1;
 
         const req = fetch(
-          `https://api.github.com/repos/${repo}/pulls?state=all&per_page=100&page=${page}`, {
+          `https://api.github.com/repos/${repo}/pulls?state=all`, {
             headers: auth_headers
           }
         );
@@ -130,9 +156,7 @@ async function fetch_repos() {
       // });
 
       return ret2;
-    });
-
-    return final;
+    // });
 }
 
 async function fetch_new_data_and_save() {
