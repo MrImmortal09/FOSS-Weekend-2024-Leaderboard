@@ -78,7 +78,7 @@ async function fetch_existing_data() {
 
 async function start_exec() {
   // "https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1"
-  return fetch("https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1", {
+  return fetch("https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/raw/leaderboard/leaderboard.json", {
       headers: auth_headers
     })
     .then(resp => { return resp.json(); })
