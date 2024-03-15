@@ -3,6 +3,11 @@ const auth_headers = new Headers({
   'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
 })
 
+const headers = {
+  'Authorization': 'Bearer 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',  // read-only access token (5000 req/hr)
+  // 'X-GitHub-Api-Version': '2022-11-28',
+}
+
 let lastUpdated = 0;
 let cachedResults = null;
 
@@ -53,7 +58,7 @@ async function fetch_repos() {
 
         const req = fetch(
           `https://api.github.com/repos/${repo}/pulls?state=all`, {
-            headers: auth_headers
+            headers: headers
           }
         );
 
@@ -234,7 +239,7 @@ async function start_exec() {
   // }
   const tt = await fetch_repos();
   lastUpdated = localStorage.getItem("lup");
-  console.log(lastUpdated)
+  console.log((Date.now() - lastUpdated)/1000)
   
   let results = [];
   
