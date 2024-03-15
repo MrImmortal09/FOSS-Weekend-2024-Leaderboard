@@ -1,6 +1,6 @@
 
 const auth_headers = new Headers({
-  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
+  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
 
   // 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
 	// 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
