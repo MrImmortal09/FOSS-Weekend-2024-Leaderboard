@@ -6,7 +6,7 @@ const auth_headers = new Headers({
 })
 
 async function fetch_new_data_and_save() {
-  fetch("https://github.com/Animeshz/Foss-Weekend-Leaderboard/raw/main/repos.txt")
+  fetch("https://github.com/ecxtacy/FOSS-Weekend-2024-Leaderboard/raw/main/repos.txt")
     .then(resp => resp.text())
     .then(async (repos) => {
       let ret = new Map();
@@ -50,7 +50,7 @@ async function fetch_new_data_and_save() {
       let ret2 = Object.fromEntries(ret);
       console.log(ret2);
 
-      await fetch('https://api.github.com/repos/Animeshz/Foss-Weekend-Leaderboard/dispatches', {
+      await fetch('https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/dispatches', {
         method: "POST",
         headers: auth_headers,
         body: JSON.stringify({
@@ -66,12 +66,12 @@ async function fetch_new_data_and_save() {
 }
 
 async function fetch_existing_data() {
-  return fetch("https://github.com/Animeshz/Foss-Weekend-Leaderboard/raw/leaderboard/leaderboard.json")
+  return fetch("https://github.com/ecxtacy/FOSS-Weekend-2024-Leaderboard/raw/leaderboard/leaderboard.json")
     .then(resp => resp.json())
 }
 
 async function start_exec() {
-  return fetch("https://api.github.com/repos/Animeshz/Foss-Weekend-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1", {
+  return fetch("https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1", {
       headers: auth_headers
     })
     .then(resp => { return resp.json(); })
