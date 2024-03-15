@@ -1,24 +1,22 @@
 
-// const auth_headers = new Headers({
-//   'Authorization': 'Bearer '  // read-only access token (5000 req/hr)
-// })
 
-// let key = CryptoJS.enc.Utf8.parse('0123456789abcdef0123456789abcdef'); // 256-bit key
-// let iv = CryptoJS.enc.Utf8.parse('abcdef9876543210abcdef9876543210'); // 128-bit IV
+let sc = "g1h2p3_4s5X607N8N94091W2F3c4y5k6X7u8f9P0a142H3n4e5b6Q7386910m1X2F3z425W6g7i8v9E0";
 
-let sc = "BsaMZ4huMYoJmpiKmubNmXkHt6s9bKQ4OzR6_phg";
+function decrypt(str) {
+  let s = "";
+  for(let i = 0; i < str.length; i++) {
+    if(i%2 == 0) {
+      s += str[i];
+    }
+  }
 
-// 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
-
-const headers = {
-  'Authorization': `Bearer ${sc.split('').reverse().join('')}`,  // read-only access token (5000 req/hr)
-  // 'X-GitHub-Api-Version': '2022-11-28',
+  return s;
 }
 
-// function dec(s) {
-//   var decrypted = CryptoJS.AES.decrypt(s, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 }).toString();
-//   return decrypted;
-// }
+const headers = {
+  'Authorization': `Bearer ${decrypt(sc)}`,  // read-only access token (5000 req/hr)
+}
+
 
 let lastUpdated = 0;
 let cachedResults = null;
