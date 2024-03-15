@@ -1,6 +1,6 @@
 
 const auth_headers = new Headers({
-  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
+  'Authorization': 'Bearer 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'  // read-only access token (5000 req/hr)
 
   // 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
 	// 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
@@ -225,6 +225,7 @@ async function start_exec() {
   }
   console.log(results);
 
+  results.sort((a, b) => b.score - a.score);
   return results;
 
   // "https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1"
