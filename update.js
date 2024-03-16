@@ -67,7 +67,7 @@ async function fetch_repos() {
         let page = 1;
 
         const req = fetch(
-          `https://api.github.com/repos/${repo}/pulls?state=all`, {
+          `https://api.github.com/repos/${repo}/pulls?state=all&per_page=100`, {
             headers: headers
           }
         );
