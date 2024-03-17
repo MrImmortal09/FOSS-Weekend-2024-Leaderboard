@@ -66,13 +66,17 @@ async function fetch_repos() {
         console.log(repo)
         let page = 1;
 
-        const req = fetch(
-          `https://api.github.com/repos/${repo}/pulls?state=all&per_page=150`, {
-            headers: headers
+        for(let i = 1; i <= 3; i++) {
+          const req = fetch(
+            `https://api.github.com/repos/${repo}/pulls?state=all&per_page=100&page=${i}`, {
+              headers: headers
+            }
+          );
+          if(req) {
+            respPromises.push(req);
           }
-        );
-
-        respPromises.push(req);
+        }
+        
 
         // const t_resp = await fetch(
         //   `https://api.github.com/repos/${repo}/pulls?state=all&per_page=100&page=${page}`, {
