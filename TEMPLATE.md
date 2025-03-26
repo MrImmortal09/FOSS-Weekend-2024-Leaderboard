@@ -1,4 +1,4 @@
-## Cherry-picking a Commit from Another Repository
+## Cherry-picking a Issue and Pr templates
 
 If you want to cherry-pick a commit from a different repository, follow these steps!
 
