@@ -1,3 +1,0 @@
-iiitl/SNKS
-iiitl/student-hub
-iiitl/docs-web

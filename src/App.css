@@ -1,0 +1,214 @@
+:root {
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --secondary: #10b981;
+  --dark: #1f2937;
+  --light: #f9fafb;
+  --gold: #FFD700;
+  --silver: #C0C0C0;
+  --bronze: #CD7F32;
+  --background: #1a1a2e;
+  --card-bg: #16213e;
+  --accent: #0f3460;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background);
+  background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent 400px);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  width: 100%; /* Ensure full width */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem;
+  margin: 0 auto;
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+header {
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  table-layout: fixed; /* Ensure table respects container width */
+}
+
+th, td {
+  padding: 1.2rem;
+  text-align: center;
+}
+
+th {
+  background-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+tbody tr {
+  transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  transform: translateY(-2px);
+}
+
+tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.top-3 {
+  font-weight: 700;
+}
+
+.rank {
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-align: center;
+  position: relative;
+  width: 80px;
+  z-index: 2; /* Higher than the ::before element */
+  color: #FFFFFF; /* Change to white for better visibility */
+  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.8); /* Darker, stronger shadow */
+  position: relative;
+}
+
+.rank::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  z-index: -1; /* Ensure it's behind the text */
+  transition: all 0.3s ease;
+}
+
+.rank-1::before {
+  background: linear-gradient(135deg, var(--gold), #ffc043);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.rank-2::before {
+  background: linear-gradient(135deg, var(--silver), #e0e0e0);
+  box-shadow: 0 0 15px rgba(192, 192, 192, 0.3);
+}
+
+.rank-3::before {
+  background: linear-gradient(135deg, var(--bronze), #dda15e);
+  box-shadow: 0 0 15px rgba(205, 127, 50, 0.3);
+}
+
+.rank-1, .rank-2, .rank-3 {
+  font-weight: 900; /* Extra bold for more visibility */
+}
+
+.username {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.score {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--primary-light);
+  text-shadow: 0 0 10px rgba(129, 140, 248, 0.3);
+}
+
+footer {
+  margin-top: 2rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  .container {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  th, td {
+    padding: 0.8rem;
+  }
+  
+  .rank::before {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  th, td {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .rank::before {
+    width: 32px;
+    height: 32px;
+  }
+  
+  /* Ensure table is scrollable on very small screens */
+  .container {
+    padding: 0.5rem;
+    overflow-x: auto;
+  }
+  
+  table {
+    min-width: 350px; /* Minimum width to maintain readability */
+  }
+}
