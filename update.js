@@ -1,11 +1,10 @@
-
-
-let sc = "g1h2p3_4s5X607N8N94091W2F3c4y5k6X7u8f9P0a142H3n4e5b6Q7386910m1X2F3z425W6g7i8v9E0";
+// Fetch the token from environment variables
+let sc = process.env.GITHUB_TOKEN;
 
 function decrypt(str) {
   let s = "";
-  for(let i = 0; i < str.length; i++) {
-    if(i%2 == 0) {
+  for (let i = 0; i < str.length; i++) {
+    if (i % 2 == 0) {
       s += str[i];
     }
   }
@@ -14,49 +13,23 @@ function decrypt(str) {
 }
 
 const headers = {
-  'Authorization': `Bearer ${decrypt(sc)}`,  // read-only access token (5000 req/hr)
-}
-
+  'Authorization': `Bearer ${decrypt(sc)}`,
+};
 
 let lastUpdated = 0;
 let cachedResults = null;
 
 const repo_list = [
-  "iiitl/realty",
-  "iiitl/translate_app",
-  "iiitl/chat_buddy",
-  "iiitl/Classification",
-  "iiitl/Regression",
-  "iiitl/Wollete",
-  "iiitl/crypto_project",
-  "iiitl/batting",
-  "iiitl/snake-game-js",
-  "iiitl/Github-Finder",
-  "iiitl/MERN_AUTH",
-  "iiitl/Note_Generator",
-  "iiitl/Jumble_Words",
-  "iiitl/Media_Player",
-  "iiitl/React-Native-To-Do",
-  "iiitl/bash-practice-repo-24",
-  "iiitl/git-practice-weekend-24"
+  "iiitl/student-hub",
+  "iiitl/SNKS",
 ];
 
 
 async function fetch_repos() {
-
-  // let final = await fetch("https://raw.githubusercontent.com/ecxtacy/FOSS-Weekend-2024-Leaderboard/main/repos.txt", { headers: auth_headers })
-  //   .then(resp => resp.text())
-  //   .then(async (repos) => {
-      // console.log(repos)
-      // // return;
-
       let ret = new Map();
       let resp = [];
 
       let respPromises = [];
-
-      // let finalRepos = repos.split(/\r?\n/);
-
       (async () => {
 
 
@@ -76,54 +49,6 @@ async function fetch_repos() {
             respPromises.push(req);
           }
         }
-        
-
-        // const t_resp = await fetch(
-        //   `https://api.github.com/repos/${repo}/pulls?state=all&per_page=100&page=${page}`, {
-        //     headers: auth_headers
-        //   }
-        // );
-        // const jsonData = await t_resp.json();
-        // console.log(jsonData)
-
-        // if(jsonData.length > 0) {
-        //   resp = [...resp, ...jsonData];
-        // }
-
-        // while (jsonData.length > 0) {
-        //   resp = [...resp, ...jsonData];
-        //   if (jsonData.length < 90) break;
-        //   page += 1;
-        //   const t_resp = await fetch(
-        //     `https://api.github.com/repos/${repo}/pulls?state=all&per_page=100&page=${page}`, {
-        //       headers: auth_headers
-        //     }
-        //   );
-        //   const jsonData = await t_resp.json();
-        // }
-
-        // pull[i].labels.name.includes("accepted") -> filter out -> 'accepted-x'
-        
-        // try {
-        //   for (const pull of resp) {
-        //     const acceptedLabels = pull.labels.filter(
-        //       (label) => label.name.includes("accepted-")
-        //     );
-        //     if (acceptedLabels.length > 0) {
-        //       const validPull = acceptedLabels[0].name;
-        //       const login = pull.user.login;
-        //       if (ret.has(login)) {
-        //         ret.set(login, ret.get(login) + parseInt(validPull.split("-")[1]));
-        //       } else {
-        //         ret.set(login, parseInt(validPull.split("-")[1]));
-        //       }
-        //     }
-        //   }
-        // } catch (error) {
-        //   console.error(`ERROR AT: ${user}, ${repo}`);
-        //   console.error(resp);
-        //   return "ded";
-        // }
       });
 
       const responses = await Promise.all(respPromises);
@@ -159,26 +84,18 @@ async function fetch_repos() {
       console.log("here")
       console.log(ret2);
 
-      // await fetch('https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/dispatches', {
-      //   method: "POST",
-      //   headers: auth_headers,
-      //   body: JSON.stringify({
-      //     event_type: 'leaderboard_update',
-      //     client_payload: {
-      //       data: JSON.stringify(ret2)
-      //     }
-      //   }),
-      // });
 
       return ret2;
-    // });
+
 }
 
+let localLeaderboardData = {}; // Variable to store leaderboard data in memory
+
 async function fetch_new_data_and_save() {
-  fetch("https://github.com/ecxtacy/FOSS-Weekend-2024-Leaderboard/raw/main/repos.txt")
+  fetch("https://github.com/MrImmortal09/FOSS-Weekend-2024-Leaderboard/raw/main/repos.txt")
     .then(resp => resp.text())
     .then(async (repos) => {
-      console.log(repos)
+      console.log(repos);
       let ret = new Map();
       repos.split(/\r?\n/).forEach(async (repo) => {
         let resp = [];
@@ -218,28 +135,18 @@ async function fetch_new_data_and_save() {
         }
       });
       let ret2 = Object.fromEntries(ret);
-      console.log("here")
+      console.log("here");
       console.log(ret2);
 
-      await fetch('https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/dispatches', {
-        method: "POST",
-        headers: auth_headers,
-        body: JSON.stringify({
-          event_type: 'leaderboard_update',
-          client_payload: {
-            data: JSON.stringify(ret2)
-          }
-        }),
-      });
-
-
+      // Store the data locally in memory
+      localLeaderboardData = ret2;
 
       return ret2;
-    })
+    });
 }
 
 async function fetch_existing_data() {
-  return fetch("https://github.com/ecxtacy/FOSS-Weekend-2024-Leaderboard/raw/leaderboard/leaderboard.json")
+  return fetch("https://github.com/MrImmortal09/FOSS-Weekend-2024-Leaderboard/blob/main/raw/leaderboard/leaderboard.json")
     .then(resp => resp.json())
 }
 
@@ -266,27 +173,5 @@ async function start_exec() {
     console.log("cached results shown")
     return cachedResults;
   }
-
-  // "https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/commits?path=leaderboard.json&ref=leaderboard&page=1&per_page=1"
-
-  // return fetch("https://api.github.com/repos/ecxtacy/FOSS-Weekend-2024-Leaderboard/contents/raw/leaderboard/leaderboard.json", {
-  //     headers: auth_headers
-  //   })
-  //   .then(resp => { return resp.json(); })
-  //   .then(json => {
-  //     // return fetch_new_data_and_save();
-  //     console.log("data is");
-  //     json = json.content
-  //     console.log(json)
-  //     let last = new Date(json[0]['commit']['commiter']['date']);
-  //     let now = new Date();
-  //     let difference_in_s = (now - last) / 1000;
-  //     if (difference_in_s > 180) {
-  //       return fetch_new_data_and_save();
-  //     } else {
-  //       return fetch_existing_data();
-  //     }
-  //   })
-
   
 }
