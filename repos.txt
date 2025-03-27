@@ -17,3 +17,4 @@ iiitl/Sneakers
 iiitl/SequriQuest
 iiitl/student-hub
 iiitl/WhatsappChatAnalyser
+iiitl/StoreHUB
