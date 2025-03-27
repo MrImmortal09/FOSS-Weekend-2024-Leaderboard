@@ -9,7 +9,7 @@ As a maintainer, you are responsible for evaluating and assigning points to Pull
 - **Easy Issue PR**: 10 pts
 - **Medium Issue PR**: 20 pts
 - **Hard Issue PR**: 30 pts
-- **Valid Issue Raised**: 5 pts (If a contributor raises a valid issue, even if he doesn't make a pr he gets 5 points if issue is valid)
+- **Valid Issue Raised**: 5 pts (If a contributor raises a valid issue, even if they don't submit a PR, they receive 5 points if the issue is valid)
 
 ### Special Repo PR Bonus:
 - **Special Repository PR**: Up to 15 additional pts (Only on medium and hard issues)
@@ -64,4 +64,8 @@ Repositories will be divided into two categories:
 
 Maintainers play a crucial role in keeping the project organized and ensuring high-quality contributions. Thank you for your efforts in maintaining the repository!
 
-Contact Foss-wing@Axios for help if needed
+## Setup Guidelines
+- Ensure the repository has a proper **README** with a setup guide.
+- If environment variables are needed, include a `.env.example` file to guide contributors on necessary configurations.
+
+For further assistance, contact **FOSS-Wing@Axios**.
