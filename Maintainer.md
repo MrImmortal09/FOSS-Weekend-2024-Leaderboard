@@ -9,7 +9,7 @@ As a maintainer, you are responsible for evaluating and assigning points to Pull
 - **Easy Issue PR**: 10 pts
 - **Medium Issue PR**: 20 pts
 - **Hard Issue PR**: 30 pts
-- **Valid Issue Raised**: 5 pts (If a contributor raises a valid issue)
+- **Valid Issue Raised**: 5 pts (If a contributor raises a valid issue, even if he doesn't make a pr he gets 5 points if issue is valid)
 
 ### Special Repo PR Bonus:
 - **Special Repository PR**: Up to 15 additional pts
@@ -17,13 +17,12 @@ As a maintainer, you are responsible for evaluating and assigning points to Pull
 ### Quality Bonus (Up to 10 pts):
 Additional points can be awarded based on PR quality:
 - **PR Description**: 2 pts (Clear and informative description)
-- **Quality of PR**: 2 pts (Well-structured, clean code, proper formatting, and follows best practices)
+- **Quality of PR**: 4 pts (Well-structured, clean code, proper formatting, and follows best practices)
 - **Commit Message**: 2 pts (Meaningful and concise commit messages)
-- **Use of Branch**: 2 pts (Proper branching strategy followed, e.g., feature branches, bugfix branches)
 - **Commit History is Clear**: 2 pts (No unnecessary commits, properly squashed commits when needed)
 
-## Practice Repositories
-Practice repositories will be divided into two categories:
+## Repositories
+Repositories will be divided into two categories:
 1. **Multiple PRs Allowed on a Single Issue**:
    - Multiple contributors can submit PRs for the same issue.
    - PRs will be closed after review, and points will be given accordingly.
