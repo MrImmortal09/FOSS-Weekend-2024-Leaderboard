@@ -102,7 +102,9 @@ function App() {
         const data = await start_exec();
         setLeaderboard(data);
       }
-      fetchData();
+      setTimeout(() => {
+        fetchData();
+      }, 15000);
     }
   }, [repoList]);
 
@@ -139,7 +141,8 @@ function App() {
         </table>
       )}
       <footer>
-        <p>Last updated: {new Date(lastUpdated).toLocaleString()}</p>
+        <p>Leaderboard will be updated every <strong>15 minutes</strong>.</p>
+        <p>Last updated: {lastUpdated ? new Date(lastUpdated).toLocaleString() : "Fetching..."}</p>
         <p>Tracking {repoList.length} repositories</p>
       </footer>
     </div>
