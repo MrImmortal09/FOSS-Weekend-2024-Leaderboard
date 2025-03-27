@@ -12,7 +12,7 @@ As a maintainer, you are responsible for evaluating and assigning points to Pull
 - **Valid Issue Raised**: 5 pts (If a contributor raises a valid issue, even if he doesn't make a pr he gets 5 points if issue is valid)
 
 ### Special Repo PR Bonus:
-- **Special Repository PR**: Up to 15 additional pts
+- **Special Repository PR**: Up to 15 additional pts (Only on medium and hard issues)
 
 ### Quality Bonus (Up to 10 pts):
 Additional points can be awarded based on PR quality:
