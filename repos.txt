@@ -1,1 +1,2 @@
 iiitl/student-hub
+iiitl/SequriQuest
