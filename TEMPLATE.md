@@ -1,6 +1,5 @@
-## Cherry-picking a Commit from Another Repository
+## Adding Issue and pr template 
 
-If you want to cherry-pick a commit from a different repository, follow these steps!
 
 ### 1. Add the remote repository:
 
