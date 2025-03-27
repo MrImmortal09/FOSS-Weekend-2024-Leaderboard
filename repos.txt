@@ -11,4 +11,5 @@ iiitl/crowdRaise-educhain
 iiitl/docs-web  
 iiitl/foodify4.5  
 iiitl/MessEase  
-iiitl/NeatNote  
+iiitl/NeatNote 
+iiitl/jikan-rs
