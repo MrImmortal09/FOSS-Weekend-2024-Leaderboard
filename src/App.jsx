@@ -198,8 +198,7 @@ function App() {
         </table>
       )}
       <footer>
-        <p>Data refreshes automatically every 2 minutes</p>
-        <p>Last updated: {lastUpdated ? new Date(lastUpdated).toLocaleString() : "Fetching..."}</p>
+        <p>Data refreshes automatically every 15 minutes</p>
         <p>Tracking {repoList.length} repositories</p>
       </footer>
     </div>
