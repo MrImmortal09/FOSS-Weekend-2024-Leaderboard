@@ -6,7 +6,6 @@ iiitl/Classification-ml
 iiitl/College-Fix-It
 iiitl/contract-combat-web3
 iiitl/crowdRaise-educhain
-iiitl/docs-web
 iiitl/foodify4.5
 iiitl/jikan-rs
 iiitl/MessEase
