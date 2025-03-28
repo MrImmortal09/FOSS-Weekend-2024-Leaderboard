@@ -6,12 +6,30 @@ function App() {
   const [cachedResults, setCachedResults] = useState(null);
   const [repoList, setRepoList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(false);
 
   // Retrieve the token from environment variables
   const token = import.meta.env.VITE_GITHUB_TOKEN;
   const headers = {
     'Authorization': `Bearer ${token}`,
   };
+
+  // Try to load cached data from localStorage on initial mount
+  useEffect(() => {
+    try {
+      const savedData = localStorage.getItem('leaderboardCache');
+      const savedTimestamp = localStorage.getItem('leaderboardTimestamp');
+      
+      if (savedData && savedTimestamp) {
+        const parsedData = JSON.parse(savedData);
+        setCachedResults(parsedData);
+        setLeaderboard(parsedData);
+        setLastUpdated(parseInt(savedTimestamp));
+      }
+    } catch (error) {
+      console.error('Error loading cached data:', error);
+    }
+  }, []);
 
   // Fetch repo list from GitHub
   async function fetchRepoList() {
@@ -71,16 +89,31 @@ function App() {
   async function start_exec() {
     // Refresh data if 120 seconds have passed or if no cache exists
     if (((Date.now() - lastUpdated) / 1000 > 120) || !cachedResults) {
-      const repoData = await fetch_repos();
-      let results = [];
-      for (let [user, score] of repoData.entries()) {
-        results.push({ username: user, score });
+      setDataLoading(true);
+      try {
+        const repoData = await fetch_repos();
+        let results = [];
+        for (let [user, score] of repoData.entries()) {
+          results.push({ username: user, score });
+        }
+        results.sort((a, b) => b.score - a.score);
+        setCachedResults(results);
+        setLeaderboard(results);
+        setLastUpdated(Date.now());
+        
+        // Save to localStorage for persistence between refreshes
+        localStorage.setItem('leaderboardCache', JSON.stringify(results));
+        localStorage.setItem('leaderboardTimestamp', Date.now().toString());
+        
+        setDataLoading(false);
+        return results;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setDataLoading(false);
+        return cachedResults || [];
       }
-      results.sort((a, b) => b.score - a.score);
-      setCachedResults(results);
-      setLastUpdated(Date.now());
-      return results;
     } else {
+      // If we have cached results, use them immediately
       return cachedResults;
     }
   }
@@ -99,14 +132,12 @@ function App() {
   useEffect(() => {
     if (repoList.length > 0) {
       async function fetchData() {
-        const data = await start_exec();
-        setLeaderboard(data);
+        await start_exec();
       }
-      setTimeout(() => {
-        fetchData();
-      }, 15000);
+      // Remove the setTimeout - fetch immediately
+      fetchData();
     }
-  }, [repoList]);
+  }, [repoList, start_exec]);
 
   return (
     <div className="container">
@@ -118,6 +149,32 @@ function App() {
         <p>Loading repositories...</p>
       ) : repoList.length === 0 ? (
         <p>No repositories found. Please check the configuration.</p>
+      ) : dataLoading ? (
+        <div>
+          <p>Updating leaderboard data...</p>
+          {leaderboard.length > 0 && (
+            <table className="leaderboard">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Contributor</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                {leaderboard.map((item, index) => (
+                  <tr key={item.username} className={index < 3 ? 'top-3' : ''}>
+                    <td className={`rank ${index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : ''}`}>
+                      {index + 1}
+                    </td>
+                    <td className="username">{item.username}</td>
+                    <td className="score">{item.score}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
       ) : (
         <table className="leaderboard">
           <thead>
@@ -141,7 +198,7 @@ function App() {
         </table>
       )}
       <footer>
-        <p>Leaderboard will be updated every <strong>15 minutes</strong>.</p>
+        <p>Data refreshes automatically every 2 minutes</p>
         <p>Last updated: {lastUpdated ? new Date(lastUpdated).toLocaleString() : "Fetching..."}</p>
         <p>Tracking {repoList.length} repositories</p>
       </footer>
