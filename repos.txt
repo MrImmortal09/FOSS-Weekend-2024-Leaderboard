@@ -18,3 +18,5 @@ iiitl/student-hub
 iiitl/WhatsappChatAnalyser
 iiitl/StoreHUB
 iiitl/Stuconnect
+iiitl/git-practice-weekend-2025
+iiitl/git-practice-archived-25
