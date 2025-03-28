@@ -167,7 +167,11 @@ function App() {
                     <td className={`rank ${index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : ''}`}>
                       {index + 1}
                     </td>
-                    <td className="username">{item.username}</td>
+                    <td className="username">
+                      <a href={`https://github.com/${item.username}`} target="_blank" rel="noopener noreferrer">
+                        {item.username}
+                      </a>
+                    </td>
                     <td className="score">{item.score}</td>
                   </tr>
                 ))}
@@ -190,7 +194,11 @@ function App() {
                 <td className={`rank ${index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : ''}`}>
                   {index + 1}
                 </td>
-                <td className="username">{item.username}</td>
+                <td className="username">
+                  <a href={`https://github.com/${item.username}`} target="_blank" rel="noopener noreferrer">
+                    {item.username}
+                  </a>
+                </td>
                 <td className="score">{item.score}</td>
               </tr>
             ))}
@@ -200,6 +208,12 @@ function App() {
       <footer>
         <p>Data refreshes automatically every 15 minutes</p>
         <p>Tracking {repoList.length} repositories</p>
+        <p>
+          Check out this:{" "}
+          <a href="https://github.com/iiitl/FOSS-Weekend-2025?tab=readme-ov-file#welcome-to-foss-weekend-2025" target="_blank" rel="noopener noreferrer">
+            FOSS Weekend Homepage
+          </a>
+        </p>
       </footer>
     </div>
   );

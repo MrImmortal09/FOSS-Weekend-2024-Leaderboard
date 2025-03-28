@@ -153,6 +153,14 @@ tr:nth-child(odd) {
   white-space: normal;
 }
 
+.username a {
+  color: white;
+}
+
+.username a:hover {
+  color: #ddd; /* Optional: Slightly different color on hover */
+}
+
 .score {
   font-weight: 700;
   font-size: 1.2rem;
@@ -213,4 +221,13 @@ footer {
   table {
     min-width: 350px; /* Minimum width to maintain readability */
   }
+}
+
+footer a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
